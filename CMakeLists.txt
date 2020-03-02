@@ -14,10 +14,6 @@ include_directories(
  ${catkin_INCLUDE_DIRS}
 )
 
-target_link_libraries(bin2pcd
-  ${catkin_LIBRARIES}
-)
-
 
 add_executable(nuscenes_add src/nuscenes_add.cpp)
 target_link_libraries(nuscenes_add
