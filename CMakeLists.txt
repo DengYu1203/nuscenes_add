@@ -7,6 +7,7 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
 pcl_ros
 roscpp
+nuscenes_pose
 )
 
 include_directories(
