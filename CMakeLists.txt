@@ -15,7 +15,7 @@ include_directories(
 )
 
 
-add_executable(nuscenes_add src/nuscenes_add.cpp)
-target_link_libraries(nuscenes_add
+add_executable(nuscenes_addition src/nuscenes_add.cpp)
+target_link_libraries(nuscenes_addition
   ${catkin_LIBRARIES}
 )
