@@ -213,3 +213,10 @@ add_executable(nuscenes_addition src/nuscenes_add.cpp)
 target_link_libraries(nuscenes_addition
   ${catkin_LIBRARIES}
 )
+
+add_executable(nuscenes_lidarseg src/nuscenes_lidarseg.cpp)
+
+target_link_libraries(nuscenes_lidarseg
+  ${catkin_LIBRARIES}
+  ${PCL_LIBRARIES}
+)
