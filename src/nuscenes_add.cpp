@@ -2,9 +2,11 @@
 #include <fstream>
 
 #include <boost/program_options.hpp>
+#include <boost/foreach.hpp>
 #include <ros/ros.h>
 #include <ros/package.h>
 #include <rosbag/bag.h>
+#include <rosbag/view.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <sensor_msgs/Imu.h>
 
@@ -26,6 +28,8 @@ using namespace tf;
 using namespace std;
 using namespace boost::filesystem;
 
+bool check_topic = false;
+
 ros::Time fileStamp(string filename){
     
     long int stamp=stod(filename.c_str());
@@ -36,7 +40,22 @@ ros::Time fileStamp(string filename){
 }
 void append_bag(string bag_path,string imu_scene,string imu_path){
     rosbag::Bag bag;
-    bag.open(bag_path,rosbag::bagmode::Append);
+    if(check_topic){
+        bag.open(bag_path,rosbag::bagmode::Append | rosbag::bagmode::Read);
+        rosbag::View view(bag);
+        std::vector<const rosbag::ConnectionInfo *> connection_infos = view.getConnections();
+        std::set<std::string> topics;
+
+        BOOST_FOREACH(const rosbag::ConnectionInfo *info, connection_infos) {
+            if(!info->topic.find("imu")){
+                std::cout << "This bag has been added the new message, please have a check!\n";
+                return;
+            }
+        }
+    }
+    else{
+        bag.open(bag_path,rosbag::bagmode::Append);
+    }
     
     string imu_fold = imu_path + "/scene-";
     string imu_name = "_ms_imu.json";
@@ -120,12 +139,15 @@ int main(int argc, char **argv){
     ros::init(argc,argv,"nuscenes_add");
 	ros::NodeHandle nh;
     // ros::Publisher imu_pub = nh.advertise<sensor_msgs::Imu>("imu",10);
-    
-    path bag_fold = argv[1];
+    string bag_fold_s;
+    string imu_fold;
+    nh.param<bool>  ("check_topic"    ,check_topic    ,false);
+    nh.param<string>("bag_fold"       ,bag_fold_s     ,argv[1]);
+    nh.param<string>("imu_fold"       ,imu_fold       ,argv[2]);
+    path bag_fold = bag_fold_s;
     string os_notation = "/";
     string bag_path;
 
-    string imu_fold = argv[2];
     cout<<"\033[1;33mReading path:\033[0m\n";
     cout<<"\033[1;33mBag fold: "<<bag_fold.c_str()<<"\033[0m"<<endl;
     cout<<"\033[1;33mImu and Pose fold: "<<imu_fold<<"\033[0m\n"<<endl;
