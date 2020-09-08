@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="nuscenes_add" type="nuscenes_addition" name="nuscenes_addition" output="screen"/>
+    <param name="check_topic"   value="false"/>
+    <param name="bag_fold"      value="/data2/nuScenes/bag_test"/>
+    <param name="imu_fold" value="/data/deng/nuScenes/can_bus"/>
+</launch>
