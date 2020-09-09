@@ -70,7 +70,7 @@ void append_bag(string bag_path,string scene,string lidarseg_path){
 
         BOOST_FOREACH(const rosbag::ConnectionInfo *info, connection_infos) {
             if(!info->topic.find("lidarseg")){
-                std::cout << "This bag has been added the new message, please have a check!\n";
+                ROS_WARN("This bag has been added the new message, please have a check!");
                 return;
             }
         }
