@@ -1,6 +1,7 @@
 <launch>
     <node pkg="nuscenes_add" type="nuscenes_lidarseg" name="nuscenes_lidarseg" output="screen"/>
     <param name="check_topic"   value="true"/>
+    <param name="use_rgb"       value="true"/>
     <param name="bag_fold"      value="/data2/nuScenes/bag_test"/>
     <param name="lidarseg_fold" value="/data/deng/nuScenes/lidar_seg_bin"/>
 </launch>
