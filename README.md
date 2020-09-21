@@ -41,11 +41,16 @@ The pointcloud may look like the picture below:
 2. change the bag_fold and lidarseg_fold path to yours
 ![](https://i.imgur.com/9S1cbKi.png)
 
-3. roslaunch
+3. decide the PointCloud type
+true : use the PointXYZRGB(color encoded from id)
+false: use the PointXYZI(save the id directly)
+![](https://i.imgur.com/mSQpnhw.png)
+
+4. roslaunch
 ```
 roslaunch nuscenes_add lidarseg.launch
 ```
-4. result
+5. result
 ![](https://i.imgur.com/ihnDztR.png)
 
 ## Bag topics
