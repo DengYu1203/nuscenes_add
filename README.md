@@ -42,9 +42,9 @@ The pointcloud may look like the picture below:
 ![](https://i.imgur.com/9S1cbKi.png)
 
 3. decide the PointCloud type
-true : use the PointXYZRGB(color encoded from id)
-false: use the PointXYZI(save the id directly)
 ![](https://i.imgur.com/mSQpnhw.png)
+true : use the PointXYZRGB(color encoded from id)\
+false: use the PointXYZI(save the id directly)
 
 4. roslaunch
 ```
