@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="nuscenes_add" type="nuscenes_ring_idx" name="nuscenes_ring_idx" output="screen"/>
+    <param name="check_topic"   value="true"/>
+    <param name="bag_fold"      value="/data2/nuScenes/bag_test"/>
+    <param name="lidar_ring_fold" value="/data/deng/nuScenes/lidar_seg_bin"/>
+</launch>

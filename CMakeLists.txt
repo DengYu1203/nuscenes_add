@@ -220,3 +220,10 @@ target_link_libraries(nuscenes_lidarseg
   ${catkin_LIBRARIES}
   ${PCL_LIBRARIES}
 )
+
+add_executable(nuscenes_ring_idx src/nuscenes_ring_idx.cpp)
+
+target_link_libraries(nuscenes_ring_idx
+  ${catkin_LIBRARIES}
+  ${PCL_LIBRARIES}
+)
