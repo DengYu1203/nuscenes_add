@@ -50,10 +50,15 @@ sensor_msgs::PointCloud2::Ptr read_bin(path input_file, ros::Time timestamp){
     for (j=0; input.good() && !input.eof(); j++) {
         velodyne_pointcloud::PointXYZIR point;
         float class_id;
-        input.read((char *) &point.x, 3*sizeof(float));
+        float ring_temp;
+        input.read((char *) &point.x, sizeof(float));
+        input.read((char *) &point.y, sizeof(float));
+        input.read((char *) &point.z, sizeof(float));
         input.read((char *) &point.intensity, sizeof(float));
-        input.read((char *) &point.ring, sizeof(float));
-        points->push_back(point);        
+        input.read((char *) &ring_temp, sizeof(float));
+        point.ring = ring_temp;
+        points->push_back(point);
+        // cout << point.x << "," << point.y << "," << point.z << "," << point.intensity << "," << point.ring << endl;
     }
     input.close();
 
